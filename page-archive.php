@@ -29,19 +29,11 @@ $current_month = '';
 <section class="archive-index">
 	<form class="archive-search" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 		<label class="screen-reader-text" for="archive-search-field"><?php esc_html_e( 'Search', 'fireblog-classic' ); ?></label>
-		<input id="archive-search-field" name="s" type="search" value="<?php echo esc_attr( get_search_query() ); ?>">
+		<input id="archive-search-field" name="s" type="text" value="<?php echo esc_attr( get_search_query() ); ?>">
 		<input type="submit" value="<?php esc_attr_e( 'Search', 'fireblog-classic' ); ?>">
 	</form>
 
-	<h1>
-		<?php
-		printf(
-			/* translators: %s: site name. */
-			esc_html__( 'Previously, on %s', 'fireblog-classic' ),
-			esc_html( get_bloginfo( 'name' ) )
-		);
-		?>
-	</h1>
+	<h1><?php echo esc_html( get_bloginfo( 'name' ) ); ?>，<?php esc_html_e( '已发布的文章', 'fireblog-classic' ); ?></h1>
 
 	<?php if ( $archive_query->have_posts() ) : ?>
 		<?php while ( $archive_query->have_posts() ) : ?>
