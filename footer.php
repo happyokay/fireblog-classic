@@ -6,8 +6,7 @@
  */
 ?>
 		<footer class="site-footer">
-			<p><?php echo esc_html( get_bloginfo( 'name' ) ); ?></p>
-			<p>&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> <?php echo esc_html( get_bloginfo( 'name' ) ); ?>.</p>
+			<p>&copy; 2026 火米博客 by <a href="https://aa.ee">happy xiao</a> ﹒<a href="https://huo.me/feed">RSS</a></p>
 		</footer>
 	</main>
 </div>
