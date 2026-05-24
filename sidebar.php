@@ -5,14 +5,23 @@
  * @package FireblogClassic
  */
 
-$author_name   = get_theme_mod( 'fireblog_author_name', get_bloginfo( 'name' ) );
+$author_name   = get_theme_mod( 'fireblog_author_name', 'happy xiao' );
+$author_url    = get_theme_mod( 'fireblog_author_url', 'https://aa.ee' );
 $sponsor_title = get_theme_mod( 'fireblog_sponsor_title', '' );
 $sponsor_text  = get_theme_mod( 'fireblog_sponsor_text', '' );
+
+if ( '' === $author_name || get_bloginfo( 'name' ) === $author_name ) {
+	$author_name = 'happy xiao';
+}
+
+if ( '' === $author_url ) {
+	$author_url = 'https://aa.ee';
+}
 ?>
 <aside class="site-sidebar" aria-label="<?php esc_attr_e( 'Site navigation', 'fireblog-classic' ); ?>">
 	<p>
 		<?php esc_html_e( 'By', 'fireblog-classic' ); ?>
-		<strong><?php echo esc_html( $author_name ); ?></strong>
+		<strong><a href="<?php echo esc_url( $author_url ); ?>"><?php echo esc_html( $author_name ); ?></a></strong>
 	</p>
 
 	<?php

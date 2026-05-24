@@ -17,6 +17,7 @@
 	<header class="site-banner">
 		<?php if ( has_custom_logo() ) : ?>
 			<?php the_custom_logo(); ?>
+			<a class="site-wordmark" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
 		<?php else : ?>
 			<a class="site-title" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
 				<span class="site-title-mark" aria-hidden="true">&#9733;</span><?php bloginfo( 'name' ); ?>

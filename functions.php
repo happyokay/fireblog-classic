@@ -37,6 +37,34 @@ function fireblog_classic_assets() {
 }
 add_action( 'wp_enqueue_scripts', 'fireblog_classic_assets' );
 
+function fireblog_classic_prepend_archive_menu_item( $items, $args ) {
+	if ( 'sidebar' !== $args->theme_location ) {
+		return $items;
+	}
+
+	$archive_li  = '<li class="menu-item menu-item-fireblog-archive">';
+	$archive_li .= '<a href="' . esc_url( home_url( '/archive/' ) ) . '">' . esc_html__( '归档', 'fireblog-classic' ) . '</a>';
+	$archive_li .= '</li>';
+
+	return $archive_li . $items;
+}
+add_filter( 'wp_nav_menu_items', 'fireblog_classic_prepend_archive_menu_item', 10, 2 );
+
+function fireblog_classic_archive_template( $template ) {
+	global $wp;
+
+	if ( isset( $wp->request ) && 'archive' === trim( $wp->request, '/' ) ) {
+		$archive_template = locate_template( 'page-archive.php' );
+		if ( $archive_template ) {
+			status_header( 200 );
+			return $archive_template;
+		}
+	}
+
+	return $template;
+}
+add_filter( 'template_include', 'fireblog_classic_archive_template' );
+
 function fireblog_classic_customize_register( $wp_customize ) {
 	$wp_customize->add_section(
 		'fireblog_classic_options',
@@ -49,7 +77,7 @@ function fireblog_classic_customize_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'fireblog_author_name',
 		array(
-			'default'           => get_bloginfo( 'name' ),
+			'default'           => 'happy xiao',
 			'sanitize_callback' => 'sanitize_text_field',
 		)
 	);
@@ -60,6 +88,23 @@ function fireblog_classic_customize_register( $wp_customize ) {
 			'label'   => __( 'Sidebar author name', 'fireblog-classic' ),
 			'section' => 'fireblog_classic_options',
 			'type'    => 'text',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'fireblog_author_url',
+		array(
+			'default'           => 'https://aa.ee',
+			'sanitize_callback' => 'esc_url_raw',
+		)
+	);
+
+	$wp_customize->add_control(
+		'fireblog_author_url',
+		array(
+			'label'   => __( 'Sidebar author URL', 'fireblog-classic' ),
+			'section' => 'fireblog_classic_options',
+			'type'    => 'url',
 		)
 	);
 
@@ -101,7 +146,7 @@ add_action( 'customize_register', 'fireblog_classic_customize_register' );
 
 function fireblog_classic_default_sidebar_menu() {
 	$items = array(
-		array( __( 'Archive', 'fireblog-classic' ), home_url( '/archive/' ) ),
+		array( __( '归档', 'fireblog-classic' ), home_url( '/archive/' ) ),
 		array( __( 'Linked List', 'fireblog-classic' ), home_url( '/category/linked/' ) ),
 		array( __( 'Projects', 'fireblog-classic' ), home_url( '/projects/' ) ),
 		array( __( 'Contact', 'fireblog-classic' ), home_url( '/contact/' ) ),

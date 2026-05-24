@@ -4,7 +4,7 @@ Theme URI: https://example.com/fireblog-classic
 Author: Custom
 Author URI: https://example.com
 Description: A spare, text-first WordPress theme inspired by classic independent weblogs.
-Version: 0.2.0
+Version: 0.3.0
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
@@ -95,8 +95,11 @@ strong {
 }
 
 .site-banner {
+	align-items: center;
 	background-color: transparent;
 	border: 0 dotted var(--fb-bg-hover);
+	display: flex;
+	gap: 84px;
 	height: auto;
 	line-height: 0;
 	margin: 59px 12px 69px 41px;
@@ -140,9 +143,31 @@ strong {
 .custom-logo {
 	display: block;
 	margin-top: 0;
-	max-height: 64px;
-	max-width: 300px;
+	max-height: 56px;
+	max-width: 56px;
+	object-fit: contain;
 	width: auto;
+}
+
+.site-wordmark {
+	border: 0;
+	color: var(--fb-text);
+	display: inline-block;
+	font-family: var(--fb-heading);
+	font-size: 1.55em;
+	font-weight: normal;
+	letter-spacing: 0;
+	line-height: 1.3em;
+	padding: 0;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.site-wordmark:hover,
+.site-wordmark:focus {
+	background-color: transparent;
+	color: #ffffff;
+	text-decoration: none;
 }
 
 .site-title-mark {
@@ -162,7 +187,7 @@ strong {
 	padding: 5px 0 0;
 	position: absolute;
 	text-align: right;
-	top: 191px;
+	top: 184px;
 	width: 160px;
 }
 
@@ -265,7 +290,7 @@ strong {
 
 .article-title {
 	font-family: var(--fb-heading);
-	font-size: 1.55em;
+	font-size: 1.36em;
 	font-weight: normal;
 	line-height: 1.3em;
 	margin: 0 0 1.25em;
@@ -445,6 +470,10 @@ strong {
 	.site-banner {
 		margin: 28px 0 32px;
 		width: auto;
+	}
+
+	.site-wordmark {
+		font-size: 1.36em;
 	}
 
 	.site-sidebar {
