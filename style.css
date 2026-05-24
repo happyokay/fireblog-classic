@@ -4,7 +4,7 @@ Theme URI: https://example.com/fireblog-classic
 Author: Custom
 Author URI: https://example.com
 Description: A spare, text-first WordPress theme inspired by classic independent weblogs.
-Version: 0.5.1
+Version: 0.5.2
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
@@ -188,7 +188,7 @@ strong {
 	position: absolute;
 	font-size: 13px;
 	text-align: right;
-	top: 167px;
+	top: 104px;
 	width: 160px;
 }
 
@@ -409,11 +409,19 @@ strong {
 }
 
 .archive-search input[type="submit"] {
+	appearance: none;
 	background-color: #f4efe3;
+	border: 1px solid #c6c0b5;
+	border-radius: 6px;
+	box-shadow: none;
 	color: #1f1f1f;
 	cursor: pointer;
 	font-family: var(--fb-sans);
 	font-size: 1em;
+	height: 22px;
+	line-height: 18px;
+	margin: 0;
+	padding: 1px 8px;
 }
 
 .archive-index h1 {
@@ -478,22 +486,27 @@ strong {
 
 	.site-box {
 		align-items: center;
+		box-sizing: border-box;
 		column-gap: 14px;
 		display: grid;
-		grid-template-columns: auto minmax(0, 1fr);
+		grid-template-columns: minmax(0, 1fr) auto;
+		max-width: 100%;
+		overflow-x: hidden;
 		padding: 0 18px 36px;
-		width: auto;
+		width: 100%;
 	}
 
 	.site-banner {
 		grid-column: 1;
 		gap: 10px;
+		justify-self: start;
 		margin: 28px 0 22px;
+		min-width: 0;
 		width: auto;
 	}
 
 	.site-wordmark {
-		font-size: 1.36em;
+		font-size: 16px;
 	}
 
 	.site-sidebar {
@@ -505,13 +518,18 @@ strong {
 	.site-sidebar p {
 		grid-column: 2;
 		justify-self: end;
-		margin: 28px 0 22px;
+		margin: 0;
+		position: absolute;
+		right: 18px;
 		text-align: right;
+		top: 28px;
+		white-space: nowrap;
 	}
 
 	.site-sidebar ul {
 		display: flex;
 		flex-wrap: wrap;
+		font-size: 16px;
 		gap: 0.75em 1em;
 		grid-column: 1 / -1;
 		margin: 0 0 3em;
@@ -527,7 +545,16 @@ strong {
 	.site-main {
 		grid-column: 1 / -1;
 		margin-left: 0;
+		max-width: 100%;
+		min-width: 0;
 		width: auto;
+	}
+
+	.article-title,
+	.entry-content,
+	.page-content,
+	.archive-index {
+		overflow-wrap: anywhere;
 	}
 
 	.archive-entry small {
@@ -537,12 +564,21 @@ strong {
 
 	.archive-search {
 		align-items: center;
+		box-sizing: border-box;
 		flex-wrap: nowrap;
+		max-width: 100%;
+		width: 100%;
 	}
 
 	.archive-search input[type="text"] {
 		flex: 1 1 auto;
+		max-width: none;
 		min-width: 0;
-		width: auto;
+		width: calc(100% - 68px);
+	}
+
+	.archive-search input[type="submit"] {
+		flex: 0 0 auto;
+		min-width: 58px;
 	}
 }
