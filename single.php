@@ -11,8 +11,8 @@ while ( have_posts() ) :
 	the_post();
 	?>
 	<article id="post-<?php the_ID(); ?>" <?php post_class( 'article' ); ?>>
-		<h6 class="dateline"><?php echo esc_html( fireblog_classic_post_dateline() ); ?></h6>
 		<h1 class="article-title"><?php the_title(); ?></h1>
+		<h6 class="dateline"><?php echo esc_html( fireblog_classic_post_dateline() ); ?></h6>
 		<div class="entry-content">
 			<?php the_content(); ?>
 		</div>

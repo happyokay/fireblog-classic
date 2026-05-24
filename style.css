@@ -4,7 +4,7 @@ Theme URI: https://example.com/fireblog-classic
 Author: Custom
 Author URI: https://example.com
 Description: A spare, text-first WordPress theme inspired by classic independent weblogs.
-Version: 0.1.0
+Version: 0.2.0
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
@@ -14,238 +14,342 @@ Text Domain: fireblog-classic
 */
 
 :root {
-	--fb-bg: #4b545c;
-	--fb-panel: #f3ead4;
-	--fb-text: #111111;
-	--fb-muted: #6d6558;
-	--fb-rule: #cbbd9d;
-	--fb-link: #a21612;
-	--fb-link-hover: #c92b24;
-	--fb-sidebar-link: #f3ead4;
-	--fb-sidebar-muted: #c6bdac;
-	--fb-serif: Georgia, "Times New Roman", Times, serif;
-	--fb-sans: Verdana, Arial, Helvetica, sans-serif;
+	--fb-bg: #4a525a;
+	--fb-bg-hover: #606870;
+	--fb-code-bg: #5b636b;
+	--fb-text: #eeeeee;
+	--fb-muted: #aaaaaa;
+	--fb-link: #dddddd;
+	--fb-rule: #777777;
+	--fb-sans: Verdana, system-ui, Helvetica, sans-serif;
+	--fb-heading: "Gill Sans MT", "Gill Sans", "Gill Sans Std", Verdana, sans-serif;
 }
 
 html {
-	font-size: 16px;
+	height: 100%;
+	margin-bottom: 1px;
 }
 
 body {
-	margin: 0;
-	background: var(--fb-bg);
+	-webkit-text-size-adjust: none;
+	background-color: var(--fb-bg);
 	color: var(--fb-text);
-	font-family: var(--fb-serif);
-	line-height: 1.45;
+	font-family: var(--fb-sans);
+	font-size: 12px;
+	line-height: 1.8em;
+	margin: 0;
+	min-width: 760px;
+	padding: 0;
+	text-align: left;
 }
 
 a {
 	color: var(--fb-link);
+	border-color: #888888;
+	border-style: none none solid;
+	border-width: 0 0 1px;
+	padding: 3px 0 2px;
 	text-decoration: none;
+}
+
+a:visited {
+	border-color: #999999;
+	border-style: none none dotted;
+	color: var(--fb-link);
 }
 
 a:hover,
 a:focus {
-	color: var(--fb-link-hover);
-	text-decoration: underline;
+	background-color: var(--fb-bg-hover);
+	border-color: var(--fb-bg-hover);
+	color: #ffffff;
+	text-decoration: none;
 }
 
 img {
 	height: auto;
+	margin-top: 5px;
 	max-width: 100%;
 }
 
+p {
+	margin: 0 0 1.6em;
+	padding: 0;
+}
+
+strong {
+	font-size: 0.91em;
+	font-weight: normal;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+}
+
 .site-box {
-	box-sizing: border-box;
-	display: grid;
-	grid-template-columns: 10.75rem minmax(0, 44rem);
-	gap: 2rem;
+	border: 0;
+	height: auto;
 	margin: 0 auto;
-	max-width: 59rem;
-	min-height: 100vh;
-	padding: 1.5rem 1rem 2.5rem;
+	padding: 0;
+	position: relative;
+	text-align: left;
+	width: 720px;
 }
 
 .site-banner {
-	grid-column: 1 / -1;
-	margin-bottom: -0.75rem;
-	padding-left: 12.75rem;
+	background-color: transparent;
+	border: 0 dotted var(--fb-bg-hover);
+	height: auto;
+	line-height: 0;
+	margin: 59px 12px 69px 41px;
+	padding: 0;
+	text-align: left;
+	width: 300px;
 }
 
 .site-title {
-	color: var(--fb-panel);
+	border: 0;
+	color: var(--fb-text);
 	display: inline-block;
-	font-family: var(--fb-sans);
-	font-size: 1.7rem;
-	font-weight: 700;
-	letter-spacing: 0;
-	line-height: 1;
+	font-family: var(--fb-heading);
+	font-size: 28px;
+	font-weight: normal;
+	letter-spacing: 0.12em;
+	line-height: 1.1;
+	padding: 0;
 	text-transform: uppercase;
 }
 
 .site-title:hover,
 .site-title:focus {
+	background-color: transparent;
 	color: #ffffff;
 	text-decoration: none;
 }
 
 .custom-logo-link {
+	border: 0;
 	display: inline-block;
 	line-height: 0;
+	padding: 0;
+}
+
+.custom-logo-link:hover,
+.custom-logo-link:focus {
+	background-color: transparent;
 }
 
 .custom-logo {
 	display: block;
-	max-height: 56px;
+	margin-top: 0;
+	max-height: 64px;
+	max-width: 300px;
 	width: auto;
 }
 
 .site-title-mark {
-	color: var(--fb-link-hover);
+	color: var(--fb-muted);
 	font-size: 1.15em;
 	margin-right: 0.25rem;
 }
 
 .site-sidebar {
-	color: var(--fb-sidebar-muted);
-	font-family: var(--fb-sans);
-	font-size: 0.69rem;
-	line-height: 1.35;
-	padding-top: 0.35rem;
+	background-color: transparent;
+	border: 0 dotted gray;
+	color: var(--fb-text);
+	font-family: var(--fb-heading);
+	height: auto;
+	left: 0;
+	line-height: 1em;
+	padding: 5px 0 0;
+	position: absolute;
 	text-align: right;
+	top: 191px;
+	width: 160px;
 }
 
 .site-sidebar p {
-	margin: 0 0 1.1rem;
+	letter-spacing: 2px;
+	margin: 0 0 5em -3em;
+	padding: 0;
 }
 
 .site-sidebar strong {
-	color: var(--fb-panel);
+	color: var(--fb-text);
+	font-size: 1em;
+	font-weight: normal;
+	letter-spacing: 2px;
+	text-transform: uppercase;
 }
 
 .site-sidebar ul {
 	list-style: none;
-	margin: 0 0 1.4rem;
+	margin: 0 0 5em -4em;
 	padding: 0;
 }
 
 .site-sidebar li {
-	margin: 0 0 0.32rem;
+	letter-spacing: 2px;
+	list-style: none;
+	margin: 0 0 1em;
+	padding: 0;
+	text-transform: uppercase;
 }
 
 .site-sidebar a {
-	color: var(--fb-sidebar-link);
+	border: 0;
+	color: var(--fb-text);
+	padding: 4px 1px;
+	text-decoration: none;
 }
 
 .site-sidebar a:hover,
 .site-sidebar a:focus {
+	background-color: var(--fb-bg-hover);
 	color: #ffffff;
 }
 
 .sidebar-sponsor {
-	border-top: 1px solid rgba(243, 234, 212, 0.22);
-	margin-top: 1.65rem;
-	padding-top: 1rem;
+	border: 0;
+	font-size: 11px;
+	line-height: 1.7em;
+	margin: 10em 0 0 2em;
+	padding: 0;
 }
 
 .sidebar-sponsor-title {
-	color: var(--fb-panel);
+	color: var(--fb-text);
 	display: block;
 	font-weight: 700;
 	margin-bottom: 0.35rem;
 }
 
 .site-main {
-	background: var(--fb-panel);
-	box-sizing: border-box;
-	max-width: 44rem;
-	min-height: 70vh;
-	padding: 2.05rem 3rem 2.65rem;
+	background: transparent;
+	border: 0 dotted gray;
+	box-sizing: content-box;
+	margin: 0 0 0 222px;
+	padding: 0;
+	position: relative;
+	width: 425px;
 }
 
 .article,
 .archive-index,
 .page-content,
 .not-found {
-	font-size: 1rem;
+	background-color: transparent;
+	color: var(--fb-text);
+	font-size: 1em;
 }
 
 .article {
-	margin-bottom: 2rem;
+	margin: 0;
+	padding: 0;
+}
+
+.article + .article {
+	margin-top: 10em;
 }
 
 .dateline,
-.archive-index h1,
 .page-content h1,
 .not-found h1 {
-	color: var(--fb-muted);
 	font-family: var(--fb-sans);
-	font-size: 0.72rem;
-	font-weight: 700;
+	color: var(--fb-muted);
+	font-size: 1em;
+	font-weight: normal;
 	letter-spacing: 0;
-	line-height: 1.25;
-	margin: 0 0 1rem;
-	text-transform: uppercase;
+	line-height: 1.8em;
+	margin: -0.75em 0 2em;
+	text-transform: none;
 }
 
 .article-title {
-	font-size: 1.25rem;
-	line-height: 1.2;
-	margin: 0 0 0.8rem;
+	font-family: var(--fb-heading);
+	font-size: 1.55em;
+	font-weight: normal;
+	line-height: 1.3em;
+	margin: 0 0 1.25em;
+	text-align: left;
 }
 
 .article-title a {
+	border: 0;
 	color: var(--fb-text);
+	padding: 0;
+	text-decoration: none;
 }
 
 .article-title a:hover,
 .article-title a:focus {
-	color: var(--fb-link);
+	background-color: transparent;
+	color: #ffffff;
 }
 
 .entry-content p,
 .page-content p {
-	margin: 0 0 1rem;
+	margin: 0 0 1.6em;
 }
 
 .entry-content blockquote {
+	background: transparent;
 	border-left: 1px solid var(--fb-rule);
-	color: #302b25;
-	margin: 1.15rem 0 1.15rem 1rem;
-	padding-left: 1rem;
+	border-right: 0 solid var(--fb-rule);
+	color: var(--fb-text);
+	margin: 2em 0 2em 0.25em;
+	outline: 0;
+	padding: 0 0 0 1.25em;
+	vertical-align: baseline;
 }
 
 .entry-content code,
 .entry-content pre {
-	font-family: Menlo, Consolas, Monaco, monospace;
-	font-size: 0.88em;
+	font-family: ui-monospace, Menlo, Monaco, monospace;
 }
 
 .entry-content pre {
-	background: rgba(255, 255, 255, 0.45);
+	background-color: var(--fb-code-bg);
+	border-radius: 3px;
+	color: var(--fb-text);
+	display: inline-block;
+	font-size: 1em;
+	line-height: 1.5em;
+	margin: 0.5em 0 2em;
+	max-width: 120%;
+	min-width: 93%;
 	overflow-x: auto;
-	padding: 0.9rem;
+	padding: 5px 10px;
+	white-space: pre;
+	width: auto;
+}
+
+.entry-content code {
+	background-color: var(--fb-code-bg);
+	border-radius: 3px;
+	font-size: 1.09em;
+	padding: 2px;
 }
 
 .permalink {
-	color: var(--fb-muted);
-	font-family: var(--fb-sans);
-	font-size: 0.8rem;
+	border: 0;
+	color: #bbbbbb;
+	font-family: "Hiragino Kaku Gothic Pro", Osaka, "Zapf Dingbats", sans-serif;
+	padding: 3px 3px 3px 5px;
 	white-space: nowrap;
 }
 
 .post-divider {
 	border: 0;
-	border-top: 1px solid var(--fb-rule);
-	margin: 2.15rem 0;
+	color: #cccccc;
+	margin: 7em 0 11em;
+	padding-right: 2em;
 }
 
 .nav-links,
 .post-navigation,
 .posts-navigation {
 	font-family: var(--fb-sans);
-	font-size: 0.75rem;
-	margin-top: 2rem;
+	font-size: 1em;
+	margin-top: 5em;
 }
 
 .nav-links {
@@ -254,56 +358,65 @@ img {
 }
 
 .archive-search {
-	margin: 0 0 3.4rem;
+	margin: 0 0 4em;
 }
 
 .archive-search input[type="search"] {
 	box-sizing: border-box;
 	font-family: var(--fb-sans);
-	font-size: 0.82rem;
-	margin-right: 0.45rem;
+	font-size: 1em;
+	margin-right: 8px;
 	max-width: 100%;
-	padding: 0.25rem 0.35rem;
+	padding: 2px 4px;
 	width: 26rem;
 }
 
 .archive-search input[type="submit"] {
 	font-family: var(--fb-sans);
-	font-size: 0.78rem;
-	padding: 0.22rem 0.65rem;
+	font-size: 1em;
 }
 
 .archive-index h1 {
 	color: var(--fb-text);
-	font-size: 1.45rem;
-	margin-bottom: 1.4rem;
-	text-transform: none;
+	font-family: var(--fb-heading);
+	font-size: 1.55em;
+	font-weight: normal;
+	line-height: 1.3em;
+	margin: 0 0 1.25em;
 }
 
 .archive-month {
 	color: var(--fb-muted);
-	font-family: var(--fb-sans);
-	font-size: 1.05rem;
-	margin: 2.1rem 0 0.95rem;
+	font-family: var(--fb-heading);
+	font-size: 1.05em;
+	font-weight: normal;
+	letter-spacing: 0.2em;
+	line-height: 1.8em;
+	margin: 4em 0 1em;
+	text-transform: uppercase;
 }
 
 .archive-entry {
-	margin: 0 0 0.78rem;
+	line-height: 1.8em;
+	margin: 0 0 1em;
+	padding-left: 2em;
+	text-indent: -2em;
 }
 
 .archive-entry small {
 	color: var(--fb-muted);
 	font-family: var(--fb-sans);
-	font-size: 0.7rem;
-	margin-left: 1.15rem;
+	font-size: 1em;
+	margin-left: 1.25em;
 	white-space: nowrap;
 }
 
 .site-footer {
 	color: var(--fb-muted);
 	font-family: var(--fb-sans);
-	font-size: 0.68rem;
-	margin-top: 3rem;
+	font-size: 0.91em;
+	margin-top: 14em;
+	padding-bottom: 1em;
 }
 
 .site-footer p {
@@ -319,29 +432,36 @@ img {
 }
 
 @media (max-width: 760px) {
+	body {
+		min-width: 0;
+	}
+
 	.site-box {
 		display: block;
-		padding: 1rem 0 0;
+		padding: 0 18px 36px;
+		width: auto;
 	}
 
 	.site-banner {
-		margin: 0 1rem 1rem;
-		padding-left: 0;
+		margin: 28px 0 32px;
+		width: auto;
 	}
 
 	.site-sidebar {
-		padding: 0 1rem 1rem;
+		margin: 0 0 3em;
+		position: static;
 		text-align: left;
+		width: auto;
 	}
 
 	.site-sidebar li {
 		display: inline;
-		margin-right: 0.75rem;
+		margin-right: 1em;
 	}
 
 	.site-main {
-		max-width: none;
-		padding: 1.45rem 1.2rem 2rem;
+		margin-left: 0;
+		width: auto;
 	}
 
 	.archive-entry small {
