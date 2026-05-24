@@ -33,8 +33,6 @@ $current_month = '';
 		<input type="submit" value="<?php esc_attr_e( 'Search', 'fireblog-classic' ); ?>">
 	</form>
 
-	<h1><?php echo esc_html( get_bloginfo( 'name' ) ); ?>，<?php esc_html_e( '已发布的文章', 'fireblog-classic' ); ?></h1>
-
 	<?php if ( $archive_query->have_posts() ) : ?>
 		<?php while ( $archive_query->have_posts() ) : ?>
 			<?php
