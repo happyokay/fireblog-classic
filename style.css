@@ -1,0 +1,351 @@
+/*
+Theme Name: Fireblog Classic
+Theme URI: https://example.com/fireblog-classic
+Author: Custom
+Author URI: https://example.com
+Description: A spare, text-first WordPress theme inspired by classic independent weblogs.
+Version: 0.1.0
+Requires at least: 6.0
+Tested up to: 6.5
+Requires PHP: 7.4
+License: GPL-2.0-or-later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: fireblog-classic
+*/
+
+:root {
+	--fb-bg: #4b545c;
+	--fb-panel: #f3ead4;
+	--fb-text: #111111;
+	--fb-muted: #6d6558;
+	--fb-rule: #cbbd9d;
+	--fb-link: #a21612;
+	--fb-link-hover: #c92b24;
+	--fb-sidebar-link: #f3ead4;
+	--fb-sidebar-muted: #c6bdac;
+	--fb-serif: Georgia, "Times New Roman", Times, serif;
+	--fb-sans: Verdana, Arial, Helvetica, sans-serif;
+}
+
+html {
+	font-size: 16px;
+}
+
+body {
+	margin: 0;
+	background: var(--fb-bg);
+	color: var(--fb-text);
+	font-family: var(--fb-serif);
+	line-height: 1.45;
+}
+
+a {
+	color: var(--fb-link);
+	text-decoration: none;
+}
+
+a:hover,
+a:focus {
+	color: var(--fb-link-hover);
+	text-decoration: underline;
+}
+
+img {
+	height: auto;
+	max-width: 100%;
+}
+
+.site-box {
+	box-sizing: border-box;
+	display: grid;
+	grid-template-columns: 10.75rem minmax(0, 44rem);
+	gap: 2rem;
+	margin: 0 auto;
+	max-width: 59rem;
+	min-height: 100vh;
+	padding: 1.5rem 1rem 2.5rem;
+}
+
+.site-banner {
+	grid-column: 1 / -1;
+	margin-bottom: -0.75rem;
+	padding-left: 12.75rem;
+}
+
+.site-title {
+	color: var(--fb-panel);
+	display: inline-block;
+	font-family: var(--fb-sans);
+	font-size: 1.7rem;
+	font-weight: 700;
+	letter-spacing: 0;
+	line-height: 1;
+	text-transform: uppercase;
+}
+
+.site-title:hover,
+.site-title:focus {
+	color: #ffffff;
+	text-decoration: none;
+}
+
+.custom-logo-link {
+	display: inline-block;
+	line-height: 0;
+}
+
+.custom-logo {
+	display: block;
+	max-height: 56px;
+	width: auto;
+}
+
+.site-title-mark {
+	color: var(--fb-link-hover);
+	font-size: 1.15em;
+	margin-right: 0.25rem;
+}
+
+.site-sidebar {
+	color: var(--fb-sidebar-muted);
+	font-family: var(--fb-sans);
+	font-size: 0.69rem;
+	line-height: 1.35;
+	padding-top: 0.35rem;
+	text-align: right;
+}
+
+.site-sidebar p {
+	margin: 0 0 1.1rem;
+}
+
+.site-sidebar strong {
+	color: var(--fb-panel);
+}
+
+.site-sidebar ul {
+	list-style: none;
+	margin: 0 0 1.4rem;
+	padding: 0;
+}
+
+.site-sidebar li {
+	margin: 0 0 0.32rem;
+}
+
+.site-sidebar a {
+	color: var(--fb-sidebar-link);
+}
+
+.site-sidebar a:hover,
+.site-sidebar a:focus {
+	color: #ffffff;
+}
+
+.sidebar-sponsor {
+	border-top: 1px solid rgba(243, 234, 212, 0.22);
+	margin-top: 1.65rem;
+	padding-top: 1rem;
+}
+
+.sidebar-sponsor-title {
+	color: var(--fb-panel);
+	display: block;
+	font-weight: 700;
+	margin-bottom: 0.35rem;
+}
+
+.site-main {
+	background: var(--fb-panel);
+	box-sizing: border-box;
+	max-width: 44rem;
+	min-height: 70vh;
+	padding: 2.05rem 3rem 2.65rem;
+}
+
+.article,
+.archive-index,
+.page-content,
+.not-found {
+	font-size: 1rem;
+}
+
+.article {
+	margin-bottom: 2rem;
+}
+
+.dateline,
+.archive-index h1,
+.page-content h1,
+.not-found h1 {
+	color: var(--fb-muted);
+	font-family: var(--fb-sans);
+	font-size: 0.72rem;
+	font-weight: 700;
+	letter-spacing: 0;
+	line-height: 1.25;
+	margin: 0 0 1rem;
+	text-transform: uppercase;
+}
+
+.article-title {
+	font-size: 1.25rem;
+	line-height: 1.2;
+	margin: 0 0 0.8rem;
+}
+
+.article-title a {
+	color: var(--fb-text);
+}
+
+.article-title a:hover,
+.article-title a:focus {
+	color: var(--fb-link);
+}
+
+.entry-content p,
+.page-content p {
+	margin: 0 0 1rem;
+}
+
+.entry-content blockquote {
+	border-left: 1px solid var(--fb-rule);
+	color: #302b25;
+	margin: 1.15rem 0 1.15rem 1rem;
+	padding-left: 1rem;
+}
+
+.entry-content code,
+.entry-content pre {
+	font-family: Menlo, Consolas, Monaco, monospace;
+	font-size: 0.88em;
+}
+
+.entry-content pre {
+	background: rgba(255, 255, 255, 0.45);
+	overflow-x: auto;
+	padding: 0.9rem;
+}
+
+.permalink {
+	color: var(--fb-muted);
+	font-family: var(--fb-sans);
+	font-size: 0.8rem;
+	white-space: nowrap;
+}
+
+.post-divider {
+	border: 0;
+	border-top: 1px solid var(--fb-rule);
+	margin: 2.15rem 0;
+}
+
+.nav-links,
+.post-navigation,
+.posts-navigation {
+	font-family: var(--fb-sans);
+	font-size: 0.75rem;
+	margin-top: 2rem;
+}
+
+.nav-links {
+	display: flex;
+	justify-content: space-between;
+}
+
+.archive-search {
+	margin: 0 0 3.4rem;
+}
+
+.archive-search input[type="search"] {
+	box-sizing: border-box;
+	font-family: var(--fb-sans);
+	font-size: 0.82rem;
+	margin-right: 0.45rem;
+	max-width: 100%;
+	padding: 0.25rem 0.35rem;
+	width: 26rem;
+}
+
+.archive-search input[type="submit"] {
+	font-family: var(--fb-sans);
+	font-size: 0.78rem;
+	padding: 0.22rem 0.65rem;
+}
+
+.archive-index h1 {
+	color: var(--fb-text);
+	font-size: 1.45rem;
+	margin-bottom: 1.4rem;
+	text-transform: none;
+}
+
+.archive-month {
+	color: var(--fb-muted);
+	font-family: var(--fb-sans);
+	font-size: 1.05rem;
+	margin: 2.1rem 0 0.95rem;
+}
+
+.archive-entry {
+	margin: 0 0 0.78rem;
+}
+
+.archive-entry small {
+	color: var(--fb-muted);
+	font-family: var(--fb-sans);
+	font-size: 0.7rem;
+	margin-left: 1.15rem;
+	white-space: nowrap;
+}
+
+.site-footer {
+	color: var(--fb-muted);
+	font-family: var(--fb-sans);
+	font-size: 0.68rem;
+	margin-top: 3rem;
+}
+
+.site-footer p {
+	margin: 0.45rem 0;
+}
+
+.screen-reader-text {
+	clip: rect(1px, 1px, 1px, 1px);
+	height: 1px;
+	overflow: hidden;
+	position: absolute !important;
+	width: 1px;
+}
+
+@media (max-width: 760px) {
+	.site-box {
+		display: block;
+		padding: 1rem 0 0;
+	}
+
+	.site-banner {
+		margin: 0 1rem 1rem;
+		padding-left: 0;
+	}
+
+	.site-sidebar {
+		padding: 0 1rem 1rem;
+		text-align: left;
+	}
+
+	.site-sidebar li {
+		display: inline;
+		margin-right: 0.75rem;
+	}
+
+	.site-main {
+		max-width: none;
+		padding: 1.45rem 1.2rem 2rem;
+	}
+
+	.archive-entry small {
+		display: block;
+		margin: 0.15rem 0 0;
+	}
+}
