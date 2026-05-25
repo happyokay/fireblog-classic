@@ -1,6 +1,6 @@
 # Fireblog Classic
 
-一个轻量、文字优先的 WordPress 主题，用来为 [huo.me](https://huo.me) 提供接近经典独立博客的阅读体验。
+一个轻量、文字优先的 WordPress 主题。复刻了 Daring Fireball 的设计。
 
 这个主题重点复刻的是布局和阅读气质：深蓝灰背景、左侧窄菜单、右侧窄正文、按月归档、朴素表单和低装饰链接。主题不包含 Daring Fireball 的 logo、图片、内容或品牌资产。
 
@@ -22,17 +22,25 @@
 
 主题会在左侧菜单第一项自动插入「归档」。其他菜单项可以在 WordPress 后台的 `Sidebar Menu` 菜单位置里配置。
 
-作者默认显示为 `happy xiao`，链接到 `https://aa.ee`。如果需要修改，可以在 Customizer 的 `Fireblog Options` 中调整。
+作者默认显示为 `happy xiao`，链接到 `https://aa.ee`。可以在「外观」->「Fireblog Classic」里修改左侧 `By` 作者、作者链接、页脚文字、页脚作者、RSS 链接和侧边栏附加文字。
 
 ## Logo
 
 主题支持 WordPress 自定义 logo。当前样式会把 logo 控制为较小尺寸，并在右侧显示站点标题。
 
+## 页脚
+
+默认页脚包含版权文字、作者链接和 RSS 链接，中间使用加粗的 `·` 分隔符。页脚内容可以在「外观」->「Fireblog Classic」中调整。
+
+## 主题封面
+
+主题包含 `screenshot.png`，WordPress 后台「主题」页面会显示主题预览封面。
+
 ---
 
 # Fireblog Classic
 
-A lightweight, text-first WordPress theme for [huo.me](https://huo.me), inspired by the reading feel of classic independent weblogs.
+A lightweight, text-first WordPress theme that recreates the design of Daring Fireball.
 
 The theme focuses on layout and reading atmosphere: dark blue-gray background, narrow left navigation, narrow main column, monthly archives, plain form controls, and restrained links. It does not include Daring Fireball logos, images, content, or brand assets.
 
@@ -54,8 +62,16 @@ You can also create a WordPress page with the slug `archive`, or manually select
 
 The sidebar menu automatically prepends the archive link. Other links can be configured by assigning a menu to the `Sidebar Menu` location.
 
-The default author line is `happy xiao`, linked to `https://aa.ee`. It can be changed in the Customizer under `Fireblog Options`.
+The default author line is `happy xiao`, linked to `https://aa.ee`. It can be changed under Appearance -> Fireblog Classic, along with the footer text, footer author, RSS link, and optional extra sidebar text.
 
 ## Logo
 
 The theme supports the standard WordPress custom logo. The current style keeps the logo compact and displays the site title beside it.
+
+## Footer
+
+The default footer includes copyright text, an author link, and an RSS link, separated by a bold `·`. Footer content can be adjusted under Appearance -> Fireblog Classic.
+
+## Theme Screenshot
+
+The theme includes `screenshot.png`, so WordPress can show a preview image on the Themes screen.

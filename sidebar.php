@@ -5,10 +5,10 @@
  * @package FireblogClassic
  */
 
-$author_name   = get_theme_mod( 'fireblog_author_name', 'happy xiao' );
-$author_url    = get_theme_mod( 'fireblog_author_url', 'https://aa.ee' );
-$sponsor_title = get_theme_mod( 'fireblog_sponsor_title', '' );
-$sponsor_text  = get_theme_mod( 'fireblog_sponsor_text', '' );
+$author_name   = fireblog_classic_get_setting( 'fireblog_author_name' );
+$author_url    = fireblog_classic_get_setting( 'fireblog_author_url' );
+$sponsor_title = fireblog_classic_get_setting( 'fireblog_sponsor_title' );
+$sponsor_text  = fireblog_classic_get_setting( 'fireblog_sponsor_text' );
 
 if ( '' === $author_name || get_bloginfo( 'name' ) === $author_name ) {
 	$author_name = 'happy xiao';

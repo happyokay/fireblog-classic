@@ -95,6 +95,164 @@ function fireblog_classic_archive_document_title( $parts ) {
 }
 add_filter( 'document_title_parts', 'fireblog_classic_archive_document_title' );
 
+function fireblog_classic_theme_defaults() {
+	$site_name = get_bloginfo( 'name' );
+	if ( '' === $site_name ) {
+		$site_name = 'Fireblog Classic';
+	}
+
+	return array(
+		'fireblog_author_name'        => 'happy xiao',
+		'fireblog_author_url'         => 'https://aa.ee',
+		'fireblog_sponsor_title'      => '',
+		'fireblog_sponsor_text'       => '',
+		'fireblog_footer_credit'      => sprintf( '© %s %s', wp_date( 'Y' ), $site_name ),
+		'fireblog_footer_author_name' => 'happy xiao',
+		'fireblog_footer_author_url'  => 'https://aa.ee',
+		'fireblog_footer_rss_label'   => 'RSS',
+		'fireblog_footer_rss_url'     => home_url( '/feed' ),
+	);
+}
+
+function fireblog_classic_get_setting( $key ) {
+	$defaults = fireblog_classic_theme_defaults();
+	$default  = isset( $defaults[ $key ] ) ? $defaults[ $key ] : '';
+
+	return get_theme_mod( $key, $default );
+}
+
+function fireblog_classic_sanitize_setting( $key, $value ) {
+	if ( false !== strpos( $key, '_url' ) ) {
+		return esc_url_raw( $value );
+	}
+
+	if ( 'fireblog_sponsor_text' === $key ) {
+		return sanitize_textarea_field( $value );
+	}
+
+	return sanitize_text_field( $value );
+}
+
+function fireblog_classic_settings_fields() {
+	return array(
+		'fireblog_author_name'        => array(
+			'label'       => __( 'Sidebar byline name', 'fireblog-classic' ),
+			'type'        => 'text',
+			'description' => __( 'The name shown after “By” in the left sidebar.', 'fireblog-classic' ),
+		),
+		'fireblog_author_url'         => array(
+			'label'       => __( 'Sidebar byline URL', 'fireblog-classic' ),
+			'type'        => 'url',
+			'description' => __( 'The link used by the sidebar byline name.', 'fireblog-classic' ),
+		),
+		'fireblog_footer_credit'      => array(
+			'label'       => __( 'Footer copyright text', 'fireblog-classic' ),
+			'type'        => 'text',
+			'description' => __( 'For example: © 2026 火米博客.', 'fireblog-classic' ),
+		),
+		'fireblog_footer_author_name' => array(
+			'label'       => __( 'Footer author name', 'fireblog-classic' ),
+			'type'        => 'text',
+			'description' => __( 'The name shown after “by” in the footer.', 'fireblog-classic' ),
+		),
+		'fireblog_footer_author_url'  => array(
+			'label'       => __( 'Footer author URL', 'fireblog-classic' ),
+			'type'        => 'url',
+			'description' => __( 'The footer author link.', 'fireblog-classic' ),
+		),
+		'fireblog_footer_rss_label'   => array(
+			'label'       => __( 'Footer RSS label', 'fireblog-classic' ),
+			'type'        => 'text',
+			'description' => __( 'The RSS link text in the footer.', 'fireblog-classic' ),
+		),
+		'fireblog_footer_rss_url'     => array(
+			'label'       => __( 'Footer RSS URL', 'fireblog-classic' ),
+			'type'        => 'url',
+			'description' => __( 'The RSS feed link in the footer.', 'fireblog-classic' ),
+		),
+		'fireblog_sponsor_title'      => array(
+			'label'       => __( 'Sidebar extra title', 'fireblog-classic' ),
+			'type'        => 'text',
+			'description' => __( 'Optional small block below the sidebar menu.', 'fireblog-classic' ),
+		),
+		'fireblog_sponsor_text'       => array(
+			'label'       => __( 'Sidebar extra text', 'fireblog-classic' ),
+			'type'        => 'textarea',
+			'description' => __( 'Optional text shown below the sidebar menu.', 'fireblog-classic' ),
+		),
+	);
+}
+
+function fireblog_classic_admin_menu() {
+	add_theme_page(
+		__( 'Fireblog Classic Settings', 'fireblog-classic' ),
+		__( 'Fireblog Classic', 'fireblog-classic' ),
+		'edit_theme_options',
+		'fireblog-classic',
+		'fireblog_classic_render_settings_page'
+	);
+}
+add_action( 'admin_menu', 'fireblog_classic_admin_menu' );
+
+function fireblog_classic_save_settings_page() {
+	if ( ! current_user_can( 'edit_theme_options' ) ) {
+		return;
+	}
+
+	if ( 'POST' !== $_SERVER['REQUEST_METHOD'] ) {
+		return;
+	}
+
+	check_admin_referer( 'fireblog_classic_save_settings' );
+
+	foreach ( fireblog_classic_settings_fields() as $key => $field ) {
+		$raw_value = isset( $_POST[ $key ] ) ? wp_unslash( $_POST[ $key ] ) : '';
+		set_theme_mod( $key, fireblog_classic_sanitize_setting( $key, $raw_value ) );
+	}
+
+	add_settings_error(
+		'fireblog_classic_messages',
+		'fireblog_classic_saved',
+		__( 'Settings saved.', 'fireblog-classic' ),
+		'updated'
+	);
+}
+
+function fireblog_classic_render_settings_page() {
+	fireblog_classic_save_settings_page();
+	?>
+	<div class="wrap">
+		<h1><?php esc_html_e( 'Fireblog Classic Settings', 'fireblog-classic' ); ?></h1>
+		<?php settings_errors( 'fireblog_classic_messages' ); ?>
+		<form method="post">
+			<?php wp_nonce_field( 'fireblog_classic_save_settings' ); ?>
+			<table class="form-table" role="presentation">
+				<tbody>
+					<?php foreach ( fireblog_classic_settings_fields() as $key => $field ) : ?>
+						<tr>
+							<th scope="row">
+								<label for="<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $field['label'] ); ?></label>
+							</th>
+							<td>
+								<?php if ( 'textarea' === $field['type'] ) : ?>
+									<textarea class="large-text" id="<?php echo esc_attr( $key ); ?>" name="<?php echo esc_attr( $key ); ?>" rows="4"><?php echo esc_textarea( fireblog_classic_get_setting( $key ) ); ?></textarea>
+								<?php else : ?>
+									<input class="regular-text" id="<?php echo esc_attr( $key ); ?>" name="<?php echo esc_attr( $key ); ?>" type="<?php echo esc_attr( $field['type'] ); ?>" value="<?php echo esc_attr( fireblog_classic_get_setting( $key ) ); ?>">
+								<?php endif; ?>
+								<?php if ( ! empty( $field['description'] ) ) : ?>
+									<p class="description"><?php echo esc_html( $field['description'] ); ?></p>
+								<?php endif; ?>
+							</td>
+						</tr>
+					<?php endforeach; ?>
+				</tbody>
+			</table>
+			<?php submit_button(); ?>
+		</form>
+	</div>
+	<?php
+}
+
 function fireblog_classic_customize_register( $wp_customize ) {
 	$wp_customize->add_section(
 		'fireblog_classic_options',
