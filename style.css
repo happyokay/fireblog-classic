@@ -4,7 +4,7 @@ Theme URI: https://example.com/fireblog-classic
 Author: Custom
 Author URI: https://example.com
 Description: A spare, text-first WordPress theme inspired by classic independent weblogs.
-Version: 0.5.5
+Version: 0.5.6
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
@@ -17,7 +17,7 @@ Text Domain: fireblog-classic
 	--fb-bg: #4a525a;
 	--fb-bg-hover: #606870;
 	--fb-code-bg: #5b636b;
-	--fb-text: #eeeeee;
+	--fb-text: #ffffff;
 	--fb-muted: #aaaaaa;
 	--fb-link: #dddddd;
 	--fb-rule: #777777;
@@ -102,7 +102,7 @@ strong {
 	gap: 12px;
 	height: auto;
 	line-height: 0;
-	margin: 59px 12px 69px 53px;
+	margin: 71px 12px 69px 53px;
 	padding: 0;
 	text-align: left;
 	width: 300px;
@@ -188,7 +188,7 @@ strong {
 	position: absolute;
 	font-size: 13px;
 	text-align: right;
-	top: 110px;
+	top: 122px;
 	width: 160px;
 }
 
@@ -273,7 +273,7 @@ strong {
 }
 
 .article + .article {
-	margin-top: 10em;
+	margin-top: 8em;
 }
 
 .dateline,
@@ -366,7 +366,7 @@ strong {
 .post-divider {
 	border: 0;
 	color: #cccccc;
-	margin: 7em 0 11em;
+	margin: 5.6em 0 8.8em;
 	padding-right: 2em;
 }
 
@@ -393,8 +393,8 @@ strong {
 
 .archive-search input[type="text"] {
 	appearance: auto;
-	background-color: #f4efe3;
-	border-color: #6f746e #e6e1d6 #e6e1d6 #6f746e;
+	background-color: #dddddd;
+	border-color: #6f746e #eeeeee #eeeeee #6f746e;
 	border-style: inset;
 	border-width: 2px;
 	box-sizing: border-box;
@@ -410,8 +410,8 @@ strong {
 
 .archive-search input[type="submit"] {
 	appearance: none;
-	background-color: #f4efe3;
-	border: 1px solid #c6c0b5;
+	background-color: #dddddd;
+	border: 1px solid #b8b8b8;
 	border-radius: 6px;
 	box-shadow: none;
 	color: #1f1f1f;
@@ -449,6 +449,11 @@ strong {
 	margin: 0 0 1em;
 	padding-left: 2em;
 	text-indent: -2em;
+}
+
+.archive-entry a {
+	border: 0;
+	padding-bottom: 0;
 }
 
 .archive-entry small {
@@ -500,7 +505,7 @@ strong {
 		grid-column: 1;
 		gap: 10px;
 		justify-self: start;
-		margin: 28px 0 22px;
+		margin: 34px 0 22px;
 		min-width: 0;
 		width: auto;
 	}
@@ -523,7 +528,7 @@ strong {
 		position: absolute;
 		right: 18px;
 		text-align: right;
-		top: 45px;
+		top: 51px;
 		white-space: nowrap;
 	}
 
@@ -533,7 +538,7 @@ strong {
 		font-size: 16px;
 		gap: 0.75em 1em;
 		grid-column: 1 / -1;
-		margin: 0 0 3em;
+		margin: 5px 0 3em;
 		padding: 0;
 		text-align: left;
 	}
