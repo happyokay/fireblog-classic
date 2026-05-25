@@ -106,11 +106,7 @@ function fireblog_classic_theme_defaults() {
 		'fireblog_author_url'         => 'https://aa.ee',
 		'fireblog_sponsor_title'      => '',
 		'fireblog_sponsor_text'       => '',
-		'fireblog_footer_credit'      => sprintf( '© %s %s', wp_date( 'Y' ), $site_name ),
-		'fireblog_footer_author_name' => 'happy xiao',
-		'fireblog_footer_author_url'  => 'https://aa.ee',
-		'fireblog_footer_rss_label'   => 'RSS',
-		'fireblog_footer_rss_url'     => home_url( '/feed' ),
+		'fireblog_footer_markdown'    => sprintf( '© %s %s by [happy xiao](https://aa.ee/) **·** [RSS](%s)', wp_date( 'Y' ), $site_name, home_url( '/feed' ) ),
 	);
 }
 
@@ -118,7 +114,46 @@ function fireblog_classic_get_setting( $key ) {
 	$defaults = fireblog_classic_theme_defaults();
 	$default  = isset( $defaults[ $key ] ) ? $defaults[ $key ] : '';
 
+	if ( 'fireblog_footer_markdown' === $key ) {
+		$saved_value = get_theme_mod( $key, null );
+		if ( null !== $saved_value ) {
+			return $saved_value;
+		}
+
+		$legacy_value = fireblog_classic_legacy_footer_markdown();
+		if ( '' !== $legacy_value ) {
+			return $legacy_value;
+		}
+	}
+
 	return get_theme_mod( $key, $default );
+}
+
+function fireblog_classic_legacy_footer_markdown() {
+	$legacy_keys = array(
+		'fireblog_footer_credit',
+		'fireblog_footer_author_name',
+		'fireblog_footer_author_url',
+		'fireblog_footer_rss_label',
+		'fireblog_footer_rss_url',
+	);
+	$legacy      = array();
+
+	foreach ( $legacy_keys as $legacy_key ) {
+		$legacy[ $legacy_key ] = get_theme_mod( $legacy_key, null );
+	}
+
+	if ( ! array_filter( $legacy, 'is_string' ) ) {
+		return '';
+	}
+
+	$credit      = null !== $legacy['fireblog_footer_credit'] ? $legacy['fireblog_footer_credit'] : sprintf( '© %s %s', wp_date( 'Y' ), get_bloginfo( 'name' ) );
+	$author_name = null !== $legacy['fireblog_footer_author_name'] ? $legacy['fireblog_footer_author_name'] : 'happy xiao';
+	$author_url  = null !== $legacy['fireblog_footer_author_url'] ? $legacy['fireblog_footer_author_url'] : 'https://aa.ee/';
+	$rss_label   = null !== $legacy['fireblog_footer_rss_label'] ? $legacy['fireblog_footer_rss_label'] : 'RSS';
+	$rss_url     = null !== $legacy['fireblog_footer_rss_url'] ? $legacy['fireblog_footer_rss_url'] : home_url( '/feed' );
+
+	return sprintf( '%s by [%s](%s) **·** [%s](%s)', $credit, $author_name, $author_url, $rss_label, $rss_url );
 }
 
 function fireblog_classic_sanitize_setting( $key, $value ) {
@@ -126,11 +161,46 @@ function fireblog_classic_sanitize_setting( $key, $value ) {
 		return esc_url_raw( $value );
 	}
 
-	if ( 'fireblog_sponsor_text' === $key ) {
+	if ( in_array( $key, array( 'fireblog_footer_markdown', 'fireblog_sponsor_text' ), true ) ) {
 		return sanitize_textarea_field( $value );
 	}
 
 	return sanitize_text_field( $value );
+}
+
+function fireblog_classic_render_footer_markdown( $markdown ) {
+	$markdown = trim( str_replace( array( "\r\n", "\r" ), "\n", $markdown ) );
+	$tokens   = array();
+
+	$store_token = function ( $html ) use ( &$tokens ) {
+		$token            = '{{fireblog_token_' . count( $tokens ) . '}}';
+		$tokens[ $token ] = $html;
+
+		return $token;
+	};
+
+	$markdown = preg_replace_callback(
+		'/\[([^\]\n]+)\]\(([^)\s]+)\)/',
+		function ( $matches ) use ( $store_token ) {
+			return $store_token( '<a href="' . esc_url( $matches[2] ) . '">' . esc_html( $matches[1] ) . '</a>' );
+		},
+		$markdown
+	);
+
+	$markdown = preg_replace_callback(
+		'/\*\*([^*\n]+)\*\*/',
+		function ( $matches ) use ( $store_token ) {
+			return $store_token( '<strong>' . esc_html( $matches[1] ) . '</strong>' );
+		},
+		$markdown
+	);
+
+	$html = esc_html( $markdown );
+	foreach ( $tokens as $token => $replacement ) {
+		$html = str_replace( esc_html( $token ), $replacement, $html );
+	}
+
+	return nl2br( $html, false );
 }
 
 function fireblog_classic_settings_fields() {
@@ -145,40 +215,10 @@ function fireblog_classic_settings_fields() {
 			'type'        => 'url',
 			'description' => __( 'The link used by the sidebar byline name.', 'fireblog-classic' ),
 		),
-		'fireblog_footer_credit'      => array(
-			'label'       => __( 'Footer copyright text', 'fireblog-classic' ),
-			'type'        => 'text',
-			'description' => __( 'For example: © 2026 火米博客.', 'fireblog-classic' ),
-		),
-		'fireblog_footer_author_name' => array(
-			'label'       => __( 'Footer author name', 'fireblog-classic' ),
-			'type'        => 'text',
-			'description' => __( 'The name shown after “by” in the footer.', 'fireblog-classic' ),
-		),
-		'fireblog_footer_author_url'  => array(
-			'label'       => __( 'Footer author URL', 'fireblog-classic' ),
-			'type'        => 'url',
-			'description' => __( 'The footer author link.', 'fireblog-classic' ),
-		),
-		'fireblog_footer_rss_label'   => array(
-			'label'       => __( 'Footer RSS label', 'fireblog-classic' ),
-			'type'        => 'text',
-			'description' => __( 'The RSS link text in the footer.', 'fireblog-classic' ),
-		),
-		'fireblog_footer_rss_url'     => array(
-			'label'       => __( 'Footer RSS URL', 'fireblog-classic' ),
-			'type'        => 'url',
-			'description' => __( 'The RSS feed link in the footer.', 'fireblog-classic' ),
-		),
-		'fireblog_sponsor_title'      => array(
-			'label'       => __( 'Sidebar extra title', 'fireblog-classic' ),
-			'type'        => 'text',
-			'description' => __( 'Optional small block below the sidebar menu.', 'fireblog-classic' ),
-		),
-		'fireblog_sponsor_text'       => array(
-			'label'       => __( 'Sidebar extra text', 'fireblog-classic' ),
+		'fireblog_footer_markdown'    => array(
+			'label'       => __( 'Footer Markdown', 'fireblog-classic' ),
 			'type'        => 'textarea',
-			'description' => __( 'Optional text shown below the sidebar menu.', 'fireblog-classic' ),
+			'description' => __( 'Use Markdown links and bold text, for example: © 2026 Site by [name](https://example.com) **·** [RSS](/feed).', 'fireblog-classic' ),
 		),
 	);
 }
@@ -254,6 +294,8 @@ function fireblog_classic_render_settings_page() {
 }
 
 function fireblog_classic_customize_register( $wp_customize ) {
+	$defaults = fireblog_classic_theme_defaults();
+
 	$wp_customize->add_section(
 		'fireblog_classic_options',
 		array(
@@ -265,7 +307,7 @@ function fireblog_classic_customize_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'fireblog_author_name',
 		array(
-			'default'           => 'happy xiao',
+			'default'           => $defaults['fireblog_author_name'],
 			'sanitize_callback' => 'sanitize_text_field',
 		)
 	);
@@ -282,7 +324,7 @@ function fireblog_classic_customize_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'fireblog_author_url',
 		array(
-			'default'           => 'https://aa.ee',
+			'default'           => $defaults['fireblog_author_url'],
 			'sanitize_callback' => 'esc_url_raw',
 		)
 	);
@@ -297,34 +339,18 @@ function fireblog_classic_customize_register( $wp_customize ) {
 	);
 
 	$wp_customize->add_setting(
-		'fireblog_sponsor_title',
+		'fireblog_footer_markdown',
 		array(
-			'default'           => '',
-			'sanitize_callback' => 'sanitize_text_field',
-		)
-	);
-
-	$wp_customize->add_control(
-		'fireblog_sponsor_title',
-		array(
-			'label'   => __( 'Sponsor title', 'fireblog-classic' ),
-			'section' => 'fireblog_classic_options',
-			'type'    => 'text',
-		)
-	);
-
-	$wp_customize->add_setting(
-		'fireblog_sponsor_text',
-		array(
-			'default'           => '',
+			'default'           => $defaults['fireblog_footer_markdown'],
 			'sanitize_callback' => 'sanitize_textarea_field',
 		)
 	);
 
 	$wp_customize->add_control(
-		'fireblog_sponsor_text',
+		'fireblog_footer_markdown',
 		array(
-			'label'   => __( 'Sponsor text', 'fireblog-classic' ),
+			'label'       => __( 'Footer Markdown', 'fireblog-classic' ),
+			'description' => __( 'Use Markdown links and bold text.', 'fireblog-classic' ),
 			'section' => 'fireblog_classic_options',
 			'type'    => 'textarea',
 		)

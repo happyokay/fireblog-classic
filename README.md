@@ -22,7 +22,7 @@
 
 主题会在左侧菜单第一项自动插入「归档」。其他菜单项可以在 WordPress 后台的 `Sidebar Menu` 菜单位置里配置。
 
-作者默认显示为 `happy xiao`，链接到 `https://aa.ee`。可以在「外观」->「Fireblog Classic」里修改左侧 `By` 作者、作者链接、页脚文字、页脚作者、RSS 链接和侧边栏附加文字。
+作者默认显示为 `happy xiao`，链接到 `https://aa.ee`。可以在「外观」->「Fireblog Classic」里修改左侧 `By` 作者和作者链接。
 
 ## Logo
 
@@ -30,7 +30,11 @@
 
 ## 页脚
 
-默认页脚包含版权文字、作者链接和 RSS 链接，中间使用加粗的 `·` 分隔符。页脚内容可以在「外观」->「Fireblog Classic」中调整。
+默认页脚使用一整段 Markdown 配置，可以在「外观」->「Fireblog Classic」中一次性修改。支持链接和加粗文本，例如：
+
+```md
+© 2026 火米博客 by [happy xiao](https://aa.ee/) **·** [RSS](https://huo.me/feed)
+```
 
 ## 主题封面
 
@@ -62,7 +66,7 @@ You can also create a WordPress page with the slug `archive`, or manually select
 
 The sidebar menu automatically prepends the archive link. Other links can be configured by assigning a menu to the `Sidebar Menu` location.
 
-The default author line is `happy xiao`, linked to `https://aa.ee`. It can be changed under Appearance -> Fireblog Classic, along with the footer text, footer author, RSS link, and optional extra sidebar text.
+The default author line is `happy xiao`, linked to `https://aa.ee`. It can be changed under Appearance -> Fireblog Classic.
 
 ## Logo
 
@@ -70,7 +74,11 @@ The theme supports the standard WordPress custom logo. The current style keeps t
 
 ## Footer
 
-The default footer includes copyright text, an author link, and an RSS link, separated by a bold `·`. Footer content can be adjusted under Appearance -> Fireblog Classic.
+The default footer is configured as one Markdown string under Appearance -> Fireblog Classic. It supports links and bold text, for example:
+
+```md
+© 2026 火米博客 by [happy xiao](https://aa.ee/) **·** [RSS](https://huo.me/feed)
+```
 
 ## Theme Screenshot
 
