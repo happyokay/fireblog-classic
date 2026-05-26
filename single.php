@@ -12,12 +12,11 @@ while ( have_posts() ) :
 	?>
 	<article id="post-<?php the_ID(); ?>" <?php post_class( 'article' ); ?>>
 		<h1 class="article-title"><?php the_title(); ?></h1>
-		<h6 class="dateline"><?php echo esc_html( fireblog_classic_post_dateline() ); ?></h6>
 		<div class="entry-content">
 			<?php the_content(); ?>
 		</div>
-		<p>
-			<a class="permalink" href="<?php the_permalink(); ?>" aria-label="<?php esc_attr_e( 'Permanent link', 'fireblog-classic' ); ?>">&#9733;</a>
+		<p class="single-dateline">
+			<span aria-hidden="true">&#9733;</span> <em><?php echo esc_html( fireblog_classic_post_short_date() ); ?></em>
 		</p>
 	</article>
 	<?php

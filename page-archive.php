@@ -47,7 +47,7 @@ $current_month = '';
 
 			<p class="archive-entry">
 				<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-				<small><?php echo esc_html( get_the_date( 'j M Y' ) ); ?></small>
+				<small><?php echo esc_html( fireblog_classic_post_short_date() ); ?></small>
 			</p>
 		<?php endwhile; ?>
 	<?php else : ?>

@@ -378,5 +378,32 @@ function fireblog_classic_default_sidebar_menu() {
 }
 
 function fireblog_classic_post_dateline() {
-	return get_the_date( 'l, j F Y' );
+	return sprintf(
+		'%1$s , %2$s',
+		fireblog_classic_post_weekday(),
+		fireblog_classic_post_short_date()
+	);
+}
+
+function fireblog_classic_post_short_date() {
+	return sprintf(
+		'%1$s 月 %2$s 日 %3$s',
+		get_the_date( 'n' ),
+		get_the_date( 'j' ),
+		get_the_date( 'Y' )
+	);
+}
+
+function fireblog_classic_post_weekday() {
+	$weekdays = array(
+		__( '星期日', 'fireblog-classic' ),
+		__( '星期一', 'fireblog-classic' ),
+		__( '星期二', 'fireblog-classic' ),
+		__( '星期三', 'fireblog-classic' ),
+		__( '星期四', 'fireblog-classic' ),
+		__( '星期五', 'fireblog-classic' ),
+		__( '星期六', 'fireblog-classic' ),
+	);
+
+	return $weekdays[ (int) get_the_date( 'w' ) ];
 }
