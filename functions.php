@@ -9,6 +9,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+if ( ! defined( 'FIREBLOG_CLASSIC_VERSION' ) ) {
+	define( 'FIREBLOG_CLASSIC_VERSION', '0.5.14' );
+}
+
 function fireblog_classic_setup() {
 	add_theme_support( 'title-tag' );
 	add_theme_support( 'post-thumbnails' );
@@ -33,7 +37,7 @@ function fireblog_classic_setup() {
 add_action( 'after_setup_theme', 'fireblog_classic_setup' );
 
 function fireblog_classic_assets() {
-	wp_enqueue_style( 'fireblog-classic-style', get_stylesheet_uri(), array(), wp_get_theme()->get( 'Version' ) );
+	wp_enqueue_style( 'fireblog-classic-style', get_stylesheet_uri(), array(), FIREBLOG_CLASSIC_VERSION );
 }
 add_action( 'wp_enqueue_scripts', 'fireblog_classic_assets' );
 

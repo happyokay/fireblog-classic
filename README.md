@@ -36,6 +36,10 @@
 © 2026 火米博客 by [happy xiao](https://aa.ee/) **·** [RSS](https://huo.me/feed)
 ```
 
+## 表格
+
+文章正文中的 HTML 表格和 WordPress 表格区块会自动显示为带边框的表格。
+
 ## 主题封面
 
 主题包含 `screenshot.png`，WordPress 后台「主题」页面会显示主题预览封面。
@@ -79,6 +83,10 @@ The default footer is configured as one Markdown string under Appearance -> Fire
 ```md
 © 2026 火米博客 by [happy xiao](https://aa.ee/) **·** [RSS](https://huo.me/feed)
 ```
+
+## Tables
+
+HTML tables and WordPress Table blocks in post content are displayed as bordered tables automatically.
 
 ## Theme Screenshot
 

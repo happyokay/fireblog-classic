@@ -4,7 +4,7 @@ Theme URI: https://example.com/fireblog-classic
 Author: Custom
 Author URI: https://example.com
 Description: A spare, text-first WordPress theme inspired by classic independent weblogs.
-Version: 0.5.11
+Version: 0.5.14
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
@@ -358,6 +358,38 @@ strong {
 	border-radius: 3px;
 	font-size: 1.09em;
 	padding: 2px;
+}
+
+.entry-content table,
+.wp-block-table table {
+	border-collapse: collapse;
+	color: var(--fb-text);
+	font-size: 1em;
+	line-height: 1.55em;
+	margin: 1.5em 0 2em;
+	max-width: 100%;
+	width: 100%;
+}
+
+.entry-content th,
+.entry-content td,
+.wp-block-table th,
+.wp-block-table td {
+	border: 1px solid var(--fb-rule);
+	padding: 0.45em 0.65em;
+	text-align: left;
+	vertical-align: top;
+}
+
+.entry-content th,
+.wp-block-table th {
+	background-color: rgba(255, 255, 255, 0.06);
+	font-weight: bold;
+}
+
+.wp-block-table {
+	margin: 1.5em 0 2em;
+	overflow-x: auto;
 }
 
 .permalink {
